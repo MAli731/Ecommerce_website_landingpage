@@ -1,0 +1,1081 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <title>MegaMart</title>
+    <style>
+        /* default swiper arrows hide */
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            content: none !important;
+        }
+
+
+
+
+
+        .card-circle::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 9999px;
+            top: -64px;
+            right: -80px;
+            z-index: 0;
+        }
+
+        .card-circle::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 9999px;
+            bottom: -96px;
+            left: -96px;
+            z-index: 0;
+        }
+
+        /* color variants */
+        .card-apple::before {
+            background: #4b5563;
+        }
+
+        /* mobile cards before & after */
+        /* gray-600 */
+        .card-apple::after {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-realme::before {
+            background: #FFE08A;
+        }
+
+        .card-realme::after {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .card-xiaomi::before {
+            background: #FFD1B0;
+        }
+
+        .card-xiaomi::after {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .swiper-pagination-bullet {
+            background-color: #ccc;
+            opacity: 1;
+        }
+
+
+        .swiper-pagination-bullet-active {
+            background-color: #008ECC;
+        }
+    </style>
+
+</head>
+
+<body class="bg-white min-h-screen">
+
+
+    <div class="container mx-auto px-4 md:px-12">
+        <!-- Fixed Header -->
+        <!-- Wrapper for top bar + header + categories -->
+        <div class="w-full md:fixed top-0 left-0 z-50">
+            <!-- Top Bar -->
+            <div
+                class="h-15 flex flex-wrap justify-center md:justify-between items-center py-1 px-4 md:px-14 bg-[#F5F5F5] text-[#666666] text-[11px] md:text-xs">
+                <p class="px-2 text-[11px]">Welcome to worldwide Megamart!</p>
+                <div class="flex flex-wrap items-center gap-2 text-[10px] md:text-sm">
+                    <span class="flex items-center gap-1 cursor-pointer hover:underline text-[11px]">
+                        <span class="material-symbols-outlined text-[#008ECC] text-[10px] md:text-sm">location_on</span>
+                        Deliver to <b>423651</b>
+                    </span>
+                    <span class="text-[11px] hidden md:inline">|</span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:underline text-[11px]">
+                        <span
+                            class="material-symbols-outlined text-[#008ECC] text-[10px] md:text-sm">delivery_truck_bolt</span>
+                        Track Order
+                    </span>
+                    <span class="text-[11px] hidden md:inline">|</span>
+                    <span class="flex items-center gap-1 cursor-pointer hover:underline text-[10px]">
+                        <span class="material-symbols-outlined text-[#008ECC] md:text-sm">percent_discount</span>
+                        All Offers
+                    </span>
+                </div>
+            </div>
+
+            <!-- Main Header -->
+            <div
+                class="w-full bg-white flex flex-col md:flex-row items-center justify-between px-4 md:px-14 py-6 gap-3">
+                <div class="flex items-center w-full md:w-auto justify-center md:justify-start">
+                    <span class="font-bold text-xl md:text-2xl text-[#008ECC]">Megamart</span>
+                </div>
+
+                <div class="flex items-center w-full md:max-w-[500px] bg-[#F5F5F5] rounded-md px-3 py-2 gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-[#008ECC]"></i>
+                    <input type="text" placeholder="Search for products..."
+                        class="flex-grow outline-none bg-transparent text-sm">
+                    <i class="fa-solid fa-bars text-[#008ECC] text-xl cursor-pointer"></i>
+                </div>
+
+                <div
+                    class="flex items-center justify-center md:justify-end w-full md:w-auto gap-5 text-gray-500 font-semibold">
+                    <div class="flex items-center gap-1 cursor-pointer">
+                        <span class="material-symbols-outlined text-[#008ECC]">person</span>
+                        <span class="text-xs md:text-sm whitespace-nowrap">Sign Up/Sign In</span>
+                    </div>
+                    <div class="flex items-center gap-1 cursor-pointer">
+                        <span class="material-symbols-outlined text-[#008ECC]">shopping_cart</span>
+                        <span class="text-xs md:text-sm">Cart</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Buttons -->
+            <div
+                class="flex gap-2 px-4 md:px-14 bg-white p-4 max-w-full font-sans justify-start border-t border-gray-300 overflow-x-auto md:overflow-x-visible scrollbar-hide md:scrollbar-default">
+                <!-- Groceries Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-groceries')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-[#008ECC] text-white whitespace-nowrap">
+                        Groceries <i class="fa-solid fa-angle-down text-white ml-1"></i> </button>
+                    <div id="dropdown-groceries"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Fruits</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Vegetables</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Dairy</a> </div>
+                </div> <!-- Premium Fruits Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-premium')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Premium Fruits <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-premium"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Exotic Fruits</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Organic Fruits</a> </div>
+                </div> <!-- Home & Kitchen Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-home')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Home & Kitchen <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-home"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Furniture</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Kitchenware</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Decor</a> </div>
+                </div> <!-- Fashion Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-fashion')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Fashion <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-fashion"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Shirts</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Pants</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Formal clothes</a> </div>
+                </div> <!-- Electronics Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-electronics')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Electronics <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-electronics"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Home Appliances</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Fans</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Bulbs</a> </div>
+                </div> <!-- Beauty Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-beauty')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Beauty <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-beauty"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Makeup</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Face wash</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Whitening cream</a> </div>
+                </div> <!-- Home Improvement Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-home-improvement')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Home Improvement <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-home-improvement"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Tools</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Paints</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Electrical Equipment</a> </div>
+                </div> <!-- Sports & Toys Dropdown -->
+                <div class="relative"> <button onclick="toggleDropdown('dropdown-sports')"
+                        class="flex items-center justify-center rounded-xl h-7 px-2 text-xs md:text-sm bg-gray-100 text-black whitespace-nowrap">
+                        Sports & Toys <i class="fa-solid fa-angle-down text-[#008ECC] ml-1"></i> </button>
+                    <div id="dropdown-sports"
+                        class="absolute left-0 top-8 hidden z-50 bg-white shadow-lg rounded-xl w-44"> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Stuffed Toys</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Sports</a> <a href="#"
+                            class="block px-4 py-2 text-xs hover:bg-gray-100">Baby Toys</a> </div>
+                </div>
+            </div>
+            <hr class="border-gray-300 mt-0">
+        </div>
+
+        <!-- Spacer to push content below fixed header on desktop -->
+        <div class="h-[10px] md:h-[150px]"></div>
+        <div class="pt-[20px] md:pt-[100px]"></div>
+
+
+        <main class="flex-grow">
+            <!-- carousel section  -->
+            <!-- HERO SWIPER -->
+            <div class="swiper heroSwiper w-full relative">
+                <div class="swiper-wrapper">
+
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div
+                            class="w-full min-h-[350px] md:h-[350px] bg-gradient-to-r from-[#1f2a44] to-[#5069a9] rounded-2xl flex items-center px-12 md:px-24">
+                            <div class="flex flex-col md:flex-row w-full justify-between items-center">
+                                <div>
+                                    <p class="text-white opacity-80">Best Deal Online on smart watches</p>
+                                    <h1 class="text-4xl md:text-5xl font-bold text-white">SMART WEARABLE</h1>
+                                    <p class="text-white">UP to <b>80% OFF</b></p>
+                                </div>
+                                <img src="/assets/images/watch.png" class="w-40 md:w-64">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div
+                            class="w-full min-h-[350px] md:h-[350px] bg-gradient-to-r from-[#5069a9] to-[#1f2a44] rounded-2xl flex items-center px-12 md:px-24">
+                            <div class="flex flex-col md:flex-row w-full justify-between items-center">
+                                <div>
+                                    <p class="text-white opacity-80">Best Deal Online on mobiles</p>
+                                    <h1 class="text-4xl md:text-5xl font-bold text-white">SMART MOBILES</h1>
+                                    <p class="text-white">UP to <b>30% OFF</b></p>
+                                </div>
+                                <img src="/assets/images/mb3.png" class="w-40 md:w-64">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div
+                            class="w-full min-h-[350px] md:h-[350px] bg-gradient-to-r from-[#5069a9] to-[#1f2a44] rounded-2xl flex items-center px-12 md:px-24">
+                            <div class="flex flex-col md:flex-row w-full justify-between items-center">
+                                <div>
+                                    <p class="text-white opacity-80">Best Deal in Fruits</p>
+                                    <h1 class="text-4xl md:text-5xl font-bold text-white">Fresh Fruits</h1>
+                                    <p class="text-white">UP to <b>30% OFF</b></p>
+                                </div>
+                                <img src="/assets/images/veg2.png" class="w-40 md:w-64">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div
+                            class="w-full min-h-[350px] md:h-[350px] bg-gradient-to-r from-[#5069a9] to-[#1f2a44] rounded-2xl flex items-center px-12 md:px-24">
+                            <div class="flex flex-col md:flex-row w-full justify-between items-center">
+                                <div>
+                                    <p class="text-white opacity-80">Best Deal in Electronics</p>
+                                    <h1 class="text-4xl md:text-5xl font-bold text-white">Home Appliances</h1>
+                                    <p class="text-white">UP to <b>40% OFF</b></p>
+                                </div>
+                                <img src="/assets/images/c3.png" class="w-40 md:w-64">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- arrows -->
+                <!-- Left Arrow -->
+                <div class="absolute top-1/2 -translate-y-1/2 left-[-32px] z-20">
+                    <!-- Extra Background / Halo -->
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center">
+                        <!-- Actual Button -->
+                        <div
+                            class="w-16 h-16 bg-white/10 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+
+                            <div
+                                class="hero-prev w-16 h-16 bg-white/10 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-chevron-left text-[#008ECC] text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <div class="absolute top-1/2 -translate-y-1/2 right-[-32px] z-20">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center">
+                        <div
+                            class="w-16 h-16 bg-white/10 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                            <div
+                                class="hero-next w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-chevron-right text-[#008ECC] text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- dots -->
+                <div class="swiper-pagination text-white"></div>
+            </div>
+
+            <!------------------------------- Mobile Product Section -------------------->
+
+            <div class="mt-12 max-w-full mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between mb-6 px-2 sm:px-6">
+                    <div class="border-b-2 border-[#008ECC] font-semibold">
+                        <h2 class="text-base sm:text-lg text-[#666666]">
+                            Grab the best deal on
+                            <span class="text-[#008ECC] text-sm sm:text-base">Smart Phones</span>
+                        </h2>
+                    </div>
+                    <a href="smart-mobile.html"
+                        class="text-xs sm:text-sm text-gray-500 flex items-center gap-1 mt-2 sm:mt-0 whitespace-nowrap sm:whitespace-normal">
+                        View All <span class="text-[#008ECC]">❯</span>
+                    </a>
+                </div>
+
+                <!-- SWIPER -->
+
+                <div class="swiper productSwiper">
+                    <div class="swiper-wrapper px-12 sm:px-12">
+                        <!-- Repeat cards as swiper-slide -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y-0 z-10 hover:z-10 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb1.png" class="w-full h-36 object-contain  ">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy S22 Ultra</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹32999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹74999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹32999</p>
+                            </div>
+                        </div>
+
+                        <!-- Repeat other cards similarly -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb2.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M13 (4GB|64GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹10499</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹14999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹4500</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 3 -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb3.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M33(4GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹16999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹24999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹8000</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 4 -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb4.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M53(4GB|64GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹31999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹40999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹9000</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 5 -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb5.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy S22 Ultra</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹67999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹85999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹18000</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb2.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M13 (4GB|64GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹10499</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹14999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹4500</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 3 -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb3.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M33(4GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹16999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹24999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹8000</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 4 -->
+                        <div class="swiper-slide !w-[220px] flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb4.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M53(4GB|64GB)</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹31999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹40999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹9000</p>
+                            </div>
+                        </div>
+
+                        <!-- CARD 5 -->
+                        <div class="swiper-slide !w-[220px]  flex-none relative">
+                            <div
+                                class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 relative cursor-pointer
+                                       transform transition-transform duration-300 hover:-translate-y z-10 hover:z-20 will-change-transform focus:outline-none focus:ring-2 focus:ring-[#008ECC]">
+                                <img src="/assets/images/mb5.png" class="mx-auto h-36 object-contain">
+                                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy S22 Ultra</h3>
+                                <div class="mt-1">
+                                    <span class="text-lg font-semibold text-gray-900">₹67999</span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">₹85999</span>
+                                </div>
+                                <hr>
+                                <p class="text-sm text-green-600 mt-1">Save-₹18000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--------------------------- Categories Cards------------------- -->
+
+
+            <div class="container mx-auto px-4 md:px-6 mb-6 py-6">
+                <div class="flex flex-col sm:flex-row justify-between items-left mb-4">
+                    <div class="inline-block border-b-2 border-[#008ECC]">
+                        <h2 class="text-base sm:text-lg font-semibold text-[#666666]">
+                            Shop From <span class="text-[#008ECC] text-sm sm:text-base pb-1">Top Categories</span>
+                        </h2>
+                    </div>
+                    <a href="categories.html"
+                        class="text-xs sm:text-sm text-gray-500 flex items-center gap-1 mt-2 sm:mt-0 whitespace-nowrap sm:whitespace-normal">
+                        View All <span class="text-[#008ECC]">❯</span>
+                    </a>
+                </div>
+
+                <!-- SWIPER -->
+                <div class="swiper categorySwiper">
+                    <div class="swiper-wrapper gap-2">
+
+                        <!-- CARD EXAMPLE -->
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer transition transform hover:-translate-y-1 hover:shadow-xl">
+                                <img src="/assets/images/c1.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">Mobile
+                            </p>
+                        </div>
+
+                        <!-- Copy & replace cards -->
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c2.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">Cosmetics
+                            </p>
+                        </div>
+
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c3.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Electronics</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c4.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">Furniture
+                            </p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c5.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">Watches
+                            </p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c6.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">Decor</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c7.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Accessories</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/mb1.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Mobile</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/veg1.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Vegetables</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/veg2.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Fruits</p>
+                        </div>
+                        <div class="swiper-slide flex flex-col items-center">
+                            <div
+                                class="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full bg-gray-100 flex items-center justify-center">
+                                <img src="/assets/images/c3.png" class="h-16 sm:h-20 md:h-24 object-contain">
+                            </div>
+                            <p class="text-sm sm:text-base md:text-base text-gray-700 mt-2 text-center w-full">
+                                Electronics</p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!------------------------------------------ Cards mobiless------------------------------------------>
+            <div class="max-w-full mx-auto py-8 px-4 md:px-6">
+                <div class="flex justify-between mb-6 items-left">
+                    <div class="border-b-2 text-[#008ECC]">
+                        <h2 class="text-lg font-semibold text-[#666666]">
+                            Top <span class="text-[#008ECC] pb-1">Electronics Brands</span>
+                        </h2>
+                    </div>
+                    <a href="#"
+                        class="text-sm text-gray-500 flex items-center gap-1 whitespace-nowrap md:whitespace-normal">View
+                        All <span class="text-[#008ECC]">❯</span></a>
+                </div>
+
+                <!-- MOBILE SWIPER -->
+                <div class="block md:hidden">
+                    <div class="swiper mobileSwiper">
+                        <div class="swiper-wrapper">
+                            <!-- APPLE CARD -->
+                            <div class="swiper-slide">
+                                <div class="card-circle card-apple h-[180px] rounded-2xl relative overflow-hidden
+                                  bg-gray-500 shadow-md cursor-pointer flex items-center justify-between px-6">
+
+                                    <div class="relative z-10 text-white">
+                                        <span class="text-[11px] bg-black/40 px-3 py-1 rounded-md">IPHONE</span>
+                                        <div class="mt-6 flex items-center gap-3">
+                                            <img src="/assets/images/Apple svg.png" class="h-6">
+                                            <div class="text-sm leading-tight">
+                                                UP to <br>
+                                                <span class="text-lg font-semibold">80% OFF</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <img src="/assets/images/image 9.png" class="relative z-10 h-32 object-contain">
+                                </div>
+                            </div>
+
+
+                            <!-- REALME CARD -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="card-circle card-realme h-[180px] rounded-2xl relative overflow-hidden
+                                           bg-[#FFF2BF] shadow-md cursor-pointer flex items-center justify-between px-6">
+
+                                    <div class="relative z-10">
+                                        <span class="text-[11px] tracking-widest bg-yellow-300 px-3 py-1 rounded-md">
+                                            REALME
+                                        </span>
+                                        <div class="mt-6">
+                                            <img src="/assets/images/realmelogo.png" class="h-6 mb-2">
+                                            <span class="text-sm">
+                                                UP to <span class="text-lg font-semibold">80% OFF</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <img src="/assets/images/realmemob.png" class="relative z-10 h-40 object-contain">
+                                </div>
+                            </div>
+
+
+                            <!-- XIAOMI CARD -->
+                            <div class="swiper-slide">
+                                <div class="card-circle card-xiaomi h-[180px] rounded-2xl relative overflow-hidden
+                                       bg-[#FFE1CC] shadow-md cursor-pointer flex items-center justify-between px-6">
+
+                                    <div class="relative z-10">
+                                        <span class="text-[11px] tracking-widest bg-orange-200 px-3 py-1 rounded-md">
+                                            XIAOMI
+                                        </span>
+                                        <div class="mt-6 flex items-center gap-3">
+                                            <img src="/assets/images/milogo.png" class="h-8">
+                                            <div class="text-sm leading-tight">
+                                                UP to <br>
+                                                <span class="text-lg font-semibold">80% OFF</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <img src="/assets/images/mimob.png" class="relative z-10 h-40 object-contain">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Pagination Dots -->
+                        <div class="swiper-pagination mt-4 text-white"></div>
+                    </div>
+                </div>
+
+
+                <!-- DESKTOP GRID (unchanged) -->
+                <div class="hidden md:flex flex-wrap gap-4 justify-center">
+                    <!-- APPLE CARD -->
+                    <div class="card-circle card-apple flex-1 min-w-[250px] max-w-[360px] h-[180px] rounded-2xl relative overflow-hidden
+             bg-gray-500 shadow-md cursor-pointer transition transform hover:-translate-y-1 hover:shadow-xl">
+
+                        <div class="relative z-10 h-full flex items-center justify-between px-6 text-white">
+                            <div>
+                                <span class="text-[11px] bg-black/40 px-3 py-1 rounded-md">IPHONE</span>
+                                <div class="mt-6 flex items-center gap-3">
+                                    <img src="/assets/images/Apple svg.png" class="h-6">
+                                    <div class="text-sm leading-tight">
+                                        UP to <br>
+                                        <span class="text-lg font-semibold">80% OFF</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="/assets/images/image 9.png" class="h-32 object-contain">
+                        </div>
+                    </div>
+
+
+                    <!-- REALME CARD -->
+                    <div class="flex-1 min-w-[250px] max-w-[360px] h-[180px] rounded-2xl relative overflow-hidden bg-[#FFF2BF]
+             shadow-md cursor-pointer transition transform hover:-translate-y-1 hover:shadow-xl">
+                        <div class="absolute -right-20 -top-16 w-64 h-64 rounded-full bg-[#FFE08A]"></div>
+                        <div class="relative z-10 h-full flex items-center justify-between px-6">
+                            <div>
+                                <span
+                                    class="text-[11px] tracking-widest bg-yellow-300 px-3 py-1 rounded-md">REALME</span>
+                                <div class="mt-6">
+                                    <img src="/assets/images/realmelogo.png" class="h-6 mb-2">
+                                    <span class="text-sm">UP to <span class="text-lg font-semibold">80%
+                                            OFF</span></span>
+                                </div>
+                            </div>
+                            <img src="/assets/images/realmemob.png" class="h-40 object-contain">
+                        </div>
+                    </div>
+
+                    <!-- XIAOMI CARD -->
+                    <div class="flex-1 min-w-[250px] max-w-[360px] h-[180px] rounded-2xl relative overflow-hidden bg-[#FFE1CC]
+             shadow-md cursor-pointer transition transform hover:-translate-y-1 hover:shadow-xl">
+                        <div class="absolute -right-20 -top-16 w-64 h-64 rounded-full bg-[#FFD1B0]"></div>
+                        <div class="relative z-10 h-full flex items-center justify-between px-6">
+                            <div>
+                                <span
+                                    class="text-[11px] tracking-widest bg-orange-200 px-3 py-1 rounded-md">XIAOMI</span>
+                                <div class="mt-6 flex items-center gap-3">
+                                    <img src="/assets/images/milogo.png" class="h-8">
+                                    <div class="text-sm leading-tight">
+                                        UP to <br>
+                                        <span class="text-lg font-semibold">80% OFF</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="/assets/images/mimob.png" class="h-40 object-contain">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- DAILY ESSENTIALS SECTION -->
+            <div class="w-full bg-white py-6">
+
+                <!-- Heading -->
+                <div class="flex flex-col sm:flex-row justify-between items-left px-6 mb-6">
+                    <div class="inline-block border-b-2 border-[#008ECC]">
+                        <h2 class="text-lg font-semibold text-[#666666]">
+                            Daily <span class="text-[#008ECC]">Essentials</span>
+                        </h2>
+                    </div>
+
+                    <a href="daily-essentials.html" class="text-sm text-gray-500 flex items-center gap-1 mt-2 sm:mt-0">
+                        View All <span class="text-[#008ECC]">❯</span>
+                    </a>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="container mx-auto px-4 md:px-6 mb-6 py-6">
+
+                    <!-- Grid header -->
+
+
+                    <!-- SWIPER -->
+                    <div class="swiper categoryGridSwiper">
+                        <div class="swiper-wrapper">
+
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg1.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Daily Essentials</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg2.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Vegetables</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg3.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Fruits</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg4.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Strawberry</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg5.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Mango</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg6.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Cherry</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg5.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Mango</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                                <div
+                                    class="h-[140px] rounded-xl bg-gray-100 flex items-center justify-center shadow-md cursor-pointer transition transform hover:-translate-y hover:shadow-xl">
+                                    <img src="/assets/images/veg6.png" class="h-24 object-contain">
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-sm text-gray-700">Cherry</p>
+                                    <p class="text-xs font-semibold">UP to 50% OFF</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+        </main>
+    </div>
+    <footer class="bg-[#008ECC] text-white w-full">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 ">
+
+                <!-- Left -->
+                <div>
+                    <h2 class="text-2xl font-semibold mb-6">MegaMart</h2>
+
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <p class="font-semibold mb-1">Contact Us</p>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined">
+                                    comment
+                                </span>
+                                <span class="text-xl">Message</span>
+                            </div>
+                            <p class="text-xs ml-6">+1 202-918-2132</p>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined">
+                                    phone_in_talk
+                                </span>
+                                <span class="text-xl">Call Us</span>
+                            </div>
+                            <p class="text-xs ml-6">+1 202-918-2132</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <p class="font-semibold mb-3 text-sm">Download App</p>
+                        <div class="flex gap-3">
+                            <img src="/assets/images/image 10.png" class="h-10" />
+                            <img src="/assets/images/image 11.png" class="h-10" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle -->
+                <div>
+                    <h3 class="font-semibold mb-4 border-b-2 border-white pb-2 inline-block">
+                        Most Popular Categories
+                    </h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li>Staples</li>
+                        <li>Beverages</li>
+                        <li>Personal Care</li>
+                        <li>Home Care</li>
+                        <li>Baby Care</li>
+                        <li>Vegetables & Fruits</li>
+                        <li>Snacks & Foods</li>
+                        <li>Daily & Bakery</li>
+                    </ul>
+                </div>
+
+                <!-- Right -->
+                <div>
+                    <h3 class="font-semibold mb-4 border-b-2 border-white pb-2 inline-block">
+                        Customer Services
+                    </h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li>About Us</li>
+                        <li>Terms & Conditions</li>
+                        <li>FAQ</li>
+                        <li>Privacy Policy</li>
+                        <li>E-waste Policy</li>
+                        <li>Cancellation & Return Policy</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/30 mt-6 pt-6 text-center text-xs">
+                © 2022 All rights reserved. Reliance Retail Ltd.
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script>
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+
+            // Close all other dropdowns
+            document.querySelectorAll("[id^='dropdown']").forEach((d) => {
+                if (d.id !== id) d.classList.add("hidden");
+            });
+
+            // Toggle clicked dropdown
+            dropdown.classList.toggle("hidden");
+        }
+
+        // Close dropdown if clicked outside
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest("button")) {
+                document.querySelectorAll("[id^='dropdown']").forEach((d) => d.classList.add("hidden"));
+            }
+        });
+        // hero section 
+        new Swiper(".heroSwiper", {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".hero-next",
+                prevEl: ".hero-prev",
+            },
+        });
+        //   mobile swiper in mobile view
+        new Swiper(".mobileSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 16,
+            pagination: {
+                el: ".mobileSwiper .swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 10,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        // mobile cards
+        new Swiper(".productSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 16,
+            // freeMode: true,
+            grabCursor: true,
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 16,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                },
+                1280: {
+                    slidesPerView: 4,
+                    spaceBetween: 16,
+                }
+            }
+        });
+        //  categories
+        const categorySwiper = new Swiper(".categorySwiper", {
+            slidesPerView: "auto",
+            spaceBetween: 16,
+            freeMode: true,
+            grabCursor: true,
+
+            breakpoints: {
+                320: { slidesPerView: 3, spaceBetween: 12 },
+                640: { slidesPerView: 4, spaceBetween: 16 },
+                1024: { slidesPerView: 8, spaceBetween: 20 },
+            }
+        });
+        //    daily essentials
+        const categoryGridSwiper = new Swiper(".categoryGridSwiper", {
+            slidesPerView: "auto",
+            spaceBetween: 16,
+            freeMode: true,
+            grabCursor: true,
+            breakpoints: {
+                320: { slidesPerView: 2, spaceBetween: 12 },
+                640: { slidesPerView: 3, spaceBetween: 16 },
+                1024: { slidesPerView: 6, spaceBetween: 20 },
+            }
+        });
+
+    </script>
+</body>
+
+</html>

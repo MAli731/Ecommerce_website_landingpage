@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Smart Mobiles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+
+<body class="bg-white">
+
+    <!-- Sticky Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center font-['Inter',sans-serif]">
+            <a href="index.html" class="text-2xl font-bold text-[#008ECC] ">Megamart</a>
+            <nav class="flex items-center gap-4">
+                <a href="index.html" class="text-[#666666] hover:text-[#008ECC]">Home</a>
+                <a href="#" class="text-[#666666] hover:text-[#008ECC]">Categories</a>
+                <a href="#" class="text-[#666666] hover:text-[#008ECC]">Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Title & Back Button -->
+    <section class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-['Inter',sans-serif]">
+      <div>
+            <h1 class="text-2xl font-bold text-[#666666] mb-1 border-b-2 border-[#008ECC]">Smart <span class="text-[#008ECC]">Mobiles</span></h1>
+            <p class="text-[#666666] text-sm">All Latest Mobiles Available</p>
+        </div>
+    </section>
+
+    <!-- Mobile/Responsive Cards Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 font-['Inter',sans-serif]">
+
+            <!-- Card 1 -->
+            <div class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-transform ">
+                <img src="/assets/images/mb1.png" alt="Galaxy S22 Ultra" class="w-full h-36 object-contain">
+                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy S22 Ultra</h3>
+                <div class="mt-1">
+                    <span class="text-lg font-semibold text-gray-900">₹32999</span>
+                    <span class="text-sm text-gray-400 line-through ml-2">₹74999</span>
+                </div>
+                <hr class="my-1">
+                <p class="text-sm text-green-600 mt-1">Save-₹32999</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-transform">
+                <img src="/assets/images/mb2.png" alt="Galaxy M13" class="w-full h-36 object-contain">
+                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M13 (4GB|64GB)</h3>
+                <div class="mt-1">
+                    <span class="text-lg font-semibold text-gray-900">₹10499</span>
+                    <span class="text-sm text-gray-400 line-through ml-2">₹14999</span>
+                </div>
+                <hr class="my-1">
+                <p class="text-sm text-green-600 mt-1">Save-₹4500</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-transform">
+                <img src="/assets/images/mb3.png" alt="Galaxy M33" class="w-full h-36 object-contain">
+                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M33 (4GB)</h3>
+                <div class="mt-1">
+                    <span class="text-lg font-semibold text-gray-900">₹16999</span>
+                    <span class="text-sm text-gray-400 line-through ml-2">₹24999</span>
+                </div>
+                <hr class="my-1">
+                <p class="text-sm text-green-600 mt-1">Save-₹8000</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-transform">
+                <img src="/assets/images/mb4.png" alt="Galaxy M53" class="w-full h-36 object-contain">
+                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy M53 (4GB|64GB)</h3>
+                <div class="mt-1">
+                    <span class="text-lg font-semibold text-gray-900">₹31999</span>
+                    <span class="text-sm text-gray-400 line-through ml-2">₹40999</span>
+                </div>
+                <hr class="my-1">
+                <p class="text-sm text-green-600 mt-1">Save-₹9000</p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-gray-100 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-transform">
+                <img src="/assets/images/mb5.png" alt="Galaxy S22 Ultra" class="w-full h-36 object-contain">
+                <h3 class="text-sm font-medium text-gray-800 mt-3">Galaxy S22 Ultra</h3>
+                <div class="mt-1">
+                    <span class="text-lg font-semibold text-gray-900">₹67999</span>
+                    <span class="text-sm text-gray-400 line-through ml-2">₹85999</span>
+                </div>
+                <hr class="my-1">
+                <p class="text-sm text-green-600 mt-1">Save-₹18000</p>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>
